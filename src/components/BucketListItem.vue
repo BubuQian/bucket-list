@@ -1,20 +1,17 @@
 <template>
     <div class='ui centered card'>
-        <div class='content'>
+        <div class='content' v-on:click="showForm(item.title)">
             <div class='header'>
                 {{item.title}}
-                <span class='right floated edit icon' v-on:click="showForm">
-                    <i class='edit icon'></i>
-                </span>
                 <span class='right floated trash icon' v-on:click="deleteItem(item)">
                     <i class='trash icon'></i>
                 </span>
             </div>
             <div class='meta'>
                 {{item.subtitle}}
-                <span class='right floated add circle icon' v-on:click="assignItem" v-show="!isAssigned">
+                <div class='right floated add circle icon' v-on:click="assignItem" v-show="!isAssigned">
                     <i class="add circle icon"></i>
-                </span>
+                </div>
                 <img class="ui avatar image right floated" src="../assets/boy-1.png" v-show="isAssigned">
             </div>
         </div>
@@ -28,24 +25,37 @@
                 3 comments          
             </div>
         </div>
-        <div class='content' v-show="isEditing">
+        <modal :name="item.title" transition="pop-out" :resizable="true" :draggable="true" :height="600">
             <div class='ui form'>
                 <div class='field'>
                     <label>Title</label>
                     <input type='text' v-model="item.title"/>
                 </div>
                 <div class='field'>
-                    <label>Subtitle</label>
+                    <label>Detail</label>
                     <input type='text' v-model="item.subtitle"/>
                 </div>
-                <div class='ui buttom top attached buttons'>
-                    <button class='ui primary button' v-on:click="hideForm">
-                        Close X
-                    </button>
+                <div class='field'>
+                    <label>Link</label>
+                    <input type='text'/>
+                </div>
+                <div class='field'>
+                    <label>Memo</label>
+                    <input type='text'/>
+                </div>
+                <div class='field'>
+                    <label>Money</label>
+                    <input type='text'/>
+                </div>
+                <div class='field'>
+                    <label>Assign to</label>
+                    <input type='text'/>
+                </div>
+                <div class='field'>
+                    <label>Comments</label>
                 </div>
             </div>
-        </div>
-        <div 
+        </modal>
     </div>
 </template>
 
@@ -55,16 +65,15 @@ export default {
   props: ['item'],
   data () {
     return {
-      isEditing: false,
       isAssigned: false
     }
   },
   methods: {
-    showForm () {
-      this.isEditing = true
+    showForm (name) {
+      this.$modal.show(name)
     },
-    hideForm () {
-      this.isEditing = false
+    hideForm (name) {
+      this.$modal.hide(name)
     },
     deleteItem (item) {
       this.$emit('delete-item', item)

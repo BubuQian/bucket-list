@@ -8,8 +8,10 @@ import Signup from './components/Signup.vue'
 import Trips from './components/Trips.vue'
 import '../semantic/dist/semantic.min.css'
 import '../semantic/dist/semantic.min.js'
+import vmodal from 'vue-js-modal'
 
 Vue.use(VueRouter);
+Vue.use(vmodal)
 
 const routes = [
   {
