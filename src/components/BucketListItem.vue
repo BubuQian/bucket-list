@@ -25,34 +25,49 @@
                 3 comments          
             </div>
         </div>
-        <modal :name="item.title" transition="pop-out" :resizable="true" :draggable="true" :height="600">
-            <div class='ui form'>
-                <div class='field'>
-                    <label>Title</label>
-                    <input type='text' v-model="item.title"/>
-                </div>
-                <div class='field'>
-                    <label>Detail</label>
-                    <input type='text' v-model="item.subtitle"/>
-                </div>
-                <div class='field'>
-                    <label>Link</label>
-                    <input type='text'/>
-                </div>
-                <div class='field'>
-                    <label>Memo</label>
-                    <input type='text'/>
-                </div>
-                <div class='field'>
-                    <label>Money</label>
-                    <input type='text'/>
-                </div>
-                <div class='field'>
-                    <label>Assign to</label>
-                    <input type='text'/>
-                </div>
-                <div class='field'>
-                    <label>Comments</label>
+        <modal :name="item.title" transition="pop-out" :resizable="true" :height="800">
+            <div class='ui segment'>
+                <div class='ui form'>
+                    <div class='field'>
+                        <label>Title</label>
+                        <input type='text' v-model="item.title"/>
+                    </div>
+                    <div class='field'>
+                        <label>Detail</label>
+                        <input type='text' v-model="item.subtitle"/>
+                    </div>
+                    <div class='field'>
+                        <label>Link</label>
+                        <input type='text'/>
+                    </div>
+                    <div class='field'>
+                        <label>Memo</label>
+                        <input type='text'/>
+                    </div>
+                    <div class='two fields'>
+                        <div class='field'>
+                            <label>Price</label>
+                            <input type='text'/>
+                        </div>
+                        <div class='field'>
+                            <label>Assign to</label>
+                            <input type='text'/>
+                        </div>
+                    </div>
+                    <div class='field'>
+                        <div class="ui comments">
+                            <h3 class="ui dividing header">Comments</h3>
+                            <comment v-for="(comment, index) in comments" :comment="comment" :key="index"></comment>
+                        </div>
+                        <form class="ui reply form">
+                            <div class="field">
+                            <textarea></textarea>
+                            </div>
+                            <div class="ui blue labeled submit icon button">
+                            <i class="icon edit"></i> Add Reply
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </modal>
@@ -60,12 +75,31 @@
 </template>
 
 <script>
+import Comment from './Comment.vue'
+
 export default {
   name: 'bucket-list-item',
   props: ['item'],
+  components: {
+      Comment
+  },
   data () {
     return {
-      isAssigned: false
+      isAssigned: false,
+      comments: [
+          {
+            author: 'Bubu Qian',
+            text: 'This is the first comment',
+            time: 'yesterday',
+            avatar: '../assets/boy-1.png'
+          },
+          {
+            author: 'Jiajia Bu',
+            text: 'Wow, second comment!',
+            time: 'today',
+            avatar: '../assets/girl-1.png'
+          }
+      ]
     }
   },
   methods: {
