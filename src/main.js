@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueFire from 'vuefire'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import Overview from './components/Overview.vue'
@@ -12,6 +13,7 @@ import vmodal from 'vue-js-modal'
 
 Vue.use(VueRouter);
 Vue.use(vmodal)
+Vue.use(VueFire)
 
 const routes = [
   {

@@ -9,6 +9,16 @@
 import TopMenu from './components/TopMenu.vue'
 import Overview from './components/Overview.vue'
 import SelfTasks from './components/SelfTasks.vue'
+import Firebase from 'firebase'
+
+const config = {
+
+}
+
+const app = Firebase.initializeApp(config)
+const db = app.database()
+const trips
+
 export default {
   name: 'app',
   components: {
